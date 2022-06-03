@@ -30,5 +30,13 @@ def get_json_content_from_responde (response):
 context = get_your_receipes()
 
 
-print (context)
+print(context['recipes'][0]['title'])
+print(context['recipes'][0]['readyInMinutes'])
+print(context['recipes'][0]['servings'])
+print(context['recipes'][0]['sourceUrl'])
 
+
+for ingredeitns in context['recipes'][0]['extendedIngredients']:
+    for key, value in ingredeitns.items():
+        if (key == 'original'):
+            print (value)
