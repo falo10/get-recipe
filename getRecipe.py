@@ -32,7 +32,7 @@ context = get_your_receipes()
 
 idNumber =  context['recipes'][0]['id']
 name = context['recipes'][0]['title']
-timeToPrepare = (context['recipes'][0]['readyInMinutes'])
+timeToPrepare = context['recipes'][0]['readyInMinutes']
 isVegetarian = context['recipes'][0]['vegetarian']
 isVegan = context['recipes'][0]['vegan']
 isGlutenFree = context['recipes'][0]['glutenFree']
@@ -84,6 +84,14 @@ while True:
         
         
         """)
+        decisionToSave = input ('Would you like to add this receipe to a file with your favoritues? Yes/No: ')
+        if (decisionToSave.upper() == 'YES'):
+            # a file with information about your saved dishes will be created
+            with open ("myFavoritueMeals","a+", encoding = "Utf-8") as file:
+                file.write("id: ")
+                file.write (str(idNumber))
+                file.write("\nname: ")
+                file.write (name)
         break
     elif (decision.upper() == 'NO'):
         break
