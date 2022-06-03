@@ -36,6 +36,15 @@ def get_your_favoritue_recipes (idNumber):
 
     return get_json_content_from_responde (response)
 
+def check_your_favoritues_dishes (fileName):
+    with open (fileName, "r+", encoding = "Utf-8") as file:
+        file.seek(0)
+        print (file.read())
+
+
+#option 0 check your file with favoritues meals
+
+check_your_favoritues_dishes("myFavoritueMeals.txt")
 
 
 # option 1 - get random receipe
@@ -113,7 +122,7 @@ while True:
         for ingredeitns in context['recipes'][0]['extendedIngredients']:
             for key, value in ingredeitns.items():
                 if (key == 'original'):
-                    print (value)
+                    print (value),
         print (f"""
 
 ------- How to prepare? -------
@@ -124,8 +133,8 @@ while True:
         """)
         decisionToSave = input ('Would you like to add this receipe to a file with your favoritues? Yes/No: ')
         if (decisionToSave.upper() == 'YES'):
-            # a file with information about your saved dishes will be created
-            with open ("myFavoritueMeals","a+", encoding = "Utf-8") as file:
+            # a file named "myFavorituesMeals" with information about your favoritue dishes will be created
+            with open ("myFavoritueMeals.txt","a+", encoding = "Utf-8") as file:
                 file.write ("\n")
                 file.write("id: ")
                 file.write (str(idNumber))
