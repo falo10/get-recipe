@@ -27,11 +27,24 @@ def get_json_content_from_responde (response):
     else:
         return context
 
+
+
 context = get_your_receipes()
 
+name = context['recipes'][0]['title']
+timeToPrepare = (context['recipes'][0]['readyInMinutes'])
 
-print(context['recipes'][0]['title'])
-print(context['recipes'][0]['readyInMinutes'])
+print (f""" Here is your random dish suggestion:
+
+{name}
+
+The time to prepare this dish is:  {timeToPrepare}
+
+""")
+
+
+
+
 print(context['recipes'][0]['servings'])
 print(context['recipes'][0]['sourceUrl'])
 
