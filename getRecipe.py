@@ -6,7 +6,7 @@ import json
 
 
 
-def get_your_receipes ():
+def get_your_recipes ():
 
     querystring  = {
                 "limitLicense":True,
@@ -26,9 +26,48 @@ def get_json_content_from_responde (response):
     else:
         return context
 
+def get_your_favoritue_recipes (idNumber):
+    
+    querystring  = {
+                "id":idNumber
+                }
+
+    response = requests.get("https://api.spoonacular.com/recipes/random" , headers = credentials.headers, params = querystring )
+
+    return get_json_content_from_responde (response)
 
 
-context = get_your_receipes()
+
+# option 1 - get random receipe
+
+idOfFavoritueMeal = int(input("Wirte id number of one of your favoritue meals, that you want to "))
+
+contextOfFavoritue = get_your_favoritue_recipes (idOfFavoritueMeal)
+
+instructionsOfFavoritue = contextOfFavoritue['recipes'][0]['instructions']
+instructionsOfFavoritue = instructionsOfFavoritue.replace("</li><li>", "\n\n")
+instructionsOfFavoritue = instructionsOfFavoritue.replace ("<ol><li>", "")
+instructionsOfFavoritue = instructionsOfFavoritue.replace ("</li></ol>","")
+
+print ("""
+
+-------List of ingredeitns:-------    
+        """)
+for ingredeitns in contextOfFavoritue['recipes'][0]['extendedIngredients']:
+    for key, value in ingredeitns.items():
+        if (key == 'original'):
+            print (value)
+print( f""")
+------- How to prepare? -------
+
+{instructionsOfFavoritue}
+        
+        
+        """)
+
+# option2 - get random recipe
+
+context = get_your_recipes()
 
 idNumber =  context['recipes'][0]['id']
 name = context['recipes'][0]['title']
@@ -75,7 +114,6 @@ while True:
             for key, value in ingredeitns.items():
                 if (key == 'original'):
                     print (value)
-                    listOfIngredeitns.append(value)
         print (f"""
 
 ------- How to prepare? -------
@@ -88,14 +126,18 @@ while True:
         if (decisionToSave.upper() == 'YES'):
             # a file with information about your saved dishes will be created
             with open ("myFavoritueMeals","a+", encoding = "Utf-8") as file:
+                file.write ("\n")
                 file.write("id: ")
                 file.write (str(idNumber))
                 file.write("\nname: ")
                 file.write (name)
+                
         break
     elif (decision.upper() == 'NO'):
         break
     else:
         print ('Wrong input')
+
+
 
 
