@@ -1,18 +1,21 @@
 import requests
-# credentials is a file where you should put your X-RapidAPI-Key and X-RapidAPI-Host 
-# you can take it from https://rapidapi.com/apidojo/api/tasty/
 import credentials
+# credentials is a file where you should put your X-RapidAPI-Key and X-RapidAPI-Host 
+# you can take it from https://spoonacular.com/food-api
+
 import json
+
+
 
 def get_your_receipes ():
 
     querystring  = {
-                "from":"0",
-                "size":"1",
-                "tags":"under_30_minutes"
+                "limitLicense":True,
+                "number	":"1",
+                
                 }
 
-    response = requests.get("https://tasty.p.rapidapi.com/recipes/list" , headers = credentials.headers, params = querystring )
+    response = requests.get("https://api.spoonacular.com/recipes/random" , headers = credentials.headers, params = querystring )
 
     return get_json_content_from_responde (response)
 
@@ -24,5 +27,8 @@ def get_json_content_from_responde (response):
     else:
         return context
 
-results = get_your_receipes()
-print (results)
+context = get_your_receipes()
+
+
+print (context)
+
