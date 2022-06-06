@@ -44,7 +44,10 @@ def check_your_favourites_dishes (fileName):
 
 
 
-Options = IntEnum ('Options', 'random favourite receipe exit')
+Options = Enum ('Options',{ 'random': 'random',
+                            'favourite':'favourite',
+                            'receipe': 'receipe',
+                            'exit': 'exit'})
 
 print('Welcome to GET RECEIPE 1.0 powered by falo10 :)')
 
@@ -59,7 +62,7 @@ selectedOption = input(f""" Write:
 """)
 
 
-#option 0 check your file with favourite  meals
+#option 0 check your file with favourite meals
 
 
 check_your_favourites_dishes("myFavouriteMeals.txt")
