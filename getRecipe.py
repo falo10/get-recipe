@@ -61,7 +61,7 @@ while True:
     """)
 
 
-#option 0 check your file with favourite meals
+#option 0 check your file with favourite meals (the file will be created after you will add some dish to favoritues!)
     
     if (selectedOption == Options.favoritue.value):
 
@@ -174,6 +174,12 @@ while True:
 
     elif (selectedOption == Options.exit.value):
         break
+
+    else:
+        print("""
+        Invalid input! Try again.
+        """)
+        continue
 
 
 print ('Thank you for using GET RECIPE! See you next time! ')
