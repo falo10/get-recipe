@@ -3,6 +3,7 @@ import credentials
 # credentials is a file where you should put your X-RapidAPI-Key and X-RapidAPI-Host 
 # you can take it from https://spoonacular.com/food-api
 import json
+from enum import *
 
 
 
@@ -26,7 +27,7 @@ def get_json_content_from_responde (response):
     else:
         return context
 
-def get_your_favoritue_recipes (idNumber):
+def get_your_favourite_recipes (idNumber):
     
     querystring  = {
                 "id":idNumber
@@ -36,40 +37,56 @@ def get_your_favoritue_recipes (idNumber):
 
     return get_json_content_from_responde (response)
 
-def check_your_favoritues_dishes (fileName):
+def check_your_favourites_dishes (fileName):
     with open (fileName, "r+", encoding = "Utf-8") as file:
         file.seek(0)
         print (file.read())
 
 
-#option 0 check your file with favoritues meals
 
-check_your_favoritues_dishes("myFavoritueMeals.txt")
+Options = IntEnum ('Options', 'random favourite receipe exit')
+
+print('Welcome to GET RECEIPE 1.0 powered by falo10 :)')
 
 
-# option 1 - get random receipe
+selectedOption = input(f""" Write:
 
-idOfFavoritueMeal = int(input("Wirte id number of one of your favoritue meals, that you want to "))
+"random" - to receive proposition of random receipe
+"favoritue" - to check names and IDs of your favoritue dishh (if you already have one!)
+"receipe" - if you want to check receipe of some specific dish (you will have to provide ID number of that dish)
+"exit" - if you want to exit the program
 
-contextOfFavoritue = get_your_favoritue_recipes (idOfFavoritueMeal)
+""")
 
-instructionsOfFavoritue = contextOfFavoritue['recipes'][0]['instructions']
-instructionsOfFavoritue = instructionsOfFavoritue.replace("</li><li>", "\n\n")
-instructionsOfFavoritue = instructionsOfFavoritue.replace ("<ol><li>", "")
-instructionsOfFavoritue = instructionsOfFavoritue.replace ("</li></ol>","")
 
+#option 0 check your file with favourite  meals
+
+
+check_your_favourites_dishes("myFavouriteMeals.txt")
+
+
+# option 1 - get your receipe
+
+idOfFavouriteMeal = int(input("Wirte id number of one of your favourite meals, that you want to "))
+
+contextOfFavourite = get_your_favourite_recipes (idOfFavouriteMeal)
+
+instructionsOfFavourite = contextOfFavourite['recipes'][0]['instructions']
+instructionsOfFavourite = instructionsOfFavourite.replace("</li><li>", "\n\n")
+instructionsOfFavourite = instructionsOfFavourite.replace ("<ol><li>", "")
+instructionsOfFavourite = instructionsOfFavourite.replace ("</li></ol>","")
 print ("""
 
 -------List of ingredeitns:-------    
         """)
-for ingredeitns in contextOfFavoritue['recipes'][0]['extendedIngredients']:
+for ingredeitns in contextOfFavourite['recipes'][0]['extendedIngredients']:
     for key, value in ingredeitns.items():
         if (key == 'original'):
             print (value)
 print( f""")
 ------- How to prepare? -------
 
-{instructionsOfFavoritue}
+{instructionsOfFavourite}
         
         
         """)
@@ -131,10 +148,10 @@ while True:
         
         
         """)
-        decisionToSave = input ('Would you like to add this receipe to a file with your favoritues? Yes/No: ')
+        decisionToSave = input ('Would you like to add this receipe to a file with your favourites? Yes/No: ')
         if (decisionToSave.upper() == 'YES'):
-            # a file named "myFavorituesMeals" with information about your favoritue dishes will be created
-            with open ("myFavoritueMeals.txt","a+", encoding = "Utf-8") as file:
+            # a file named "myFavouritesMeals" with information about your favourite dishes will be created
+            with open ("myFavouriteMeals.txt","a+", encoding = "Utf-8") as file:
                 file.write ("\n")
                 file.write("id: ")
                 file.write (str(idNumber))
