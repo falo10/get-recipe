@@ -1,6 +1,6 @@
 import requests
 import credentials
-# credentials is a file where you should put your X-RapidAPI-Key and X-RapidAPI-Host 
+# credentials is a file where you should put your X-RapidAPI-Key
 # you can take it from https://spoonacular.com/food-api
 import json
 from enum import *
