@@ -4,14 +4,15 @@ Welcome to GET RECEIPE by falo10
 
 I encourage you to use the code freely, thanks to which you will be able to learn new recipes!
 
-PYTHON 3.10.4 was used to write the code, so I encourage you to update your version if you want the program to work properly
+PYTHON 3.10.4 was used to write the code, so I encourage you to update your version if you want the program to work properly.
 
 # HOW TO RUN YOUR CODE?
 
-Download two required file from this repository:
+Download required file from this repository:
 
 getRecipe.py
 credentials.py
+myFavoriteMeals.txt
 
 and save them in the same file path.
 
